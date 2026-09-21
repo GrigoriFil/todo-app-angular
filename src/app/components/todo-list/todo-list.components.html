@@ -1,0 +1,14 @@
+<!--<h2>My task list</h2>-->
+
+<ul>
+  <!-- Go through tasks. pipe 'async' subscribe on updates -->
+  @for (task of todoService.tasks$ | async; track task.id) {
+    <li [ngClass]="{'priority-high': task.priority === 'high', 'priority-medium': task.priority === 'medium', 'priority-low': task.priority === 'low'}">
+      <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)">
+      <span [class.completed-text]="task.completed">{{ task.title }}</span>
+      <small>(Priority: {{ task.priority }})</small>
+    </li>
+  } @empty {
+    <p>There are no tasks, or they are still loading...</p>
+  }
+</ul>
