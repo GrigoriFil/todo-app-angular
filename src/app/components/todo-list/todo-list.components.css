@@ -28,6 +28,104 @@ li:hover {
   color: #a0a0a0;
 }
 
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filters button, .sort-btn {
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #374151;
+}
+
+.filters button:hover, .sort-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.filters button.active, .sort-btn.active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.actions, .edit-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn, .delete-btn, .save-btn, .cancel-btn {
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+  margin: 0;
+}
+
+.edit-btn {
+  background-color: #f59e0b;
+}
+
+.edit-btn:hover {
+  background-color: #d97706;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+.save-btn {
+  background-color: #10b981;
+}
+
+.save-btn:hover {
+  background-color: #059669;
+}
+
+.cancel-btn {
+  background-color: #6b7280;
+}
+
+.cancel-btn:hover {
+  background-color: #4b5563;
+}
+
+.edit-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
 .priority-high {border-left-color: #ff4757; }
 .priority-medium {border-left-color: #ffa502; }
 .priority-low {border-left-color: #2ed573; }

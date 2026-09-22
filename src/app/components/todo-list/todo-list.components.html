@@ -1,12 +1,31 @@
 <!--<h2>My task list</h2>-->
 
+<div class="controls">
+  <div class="filters">
+    <button [class.active]="currentFilter === 'all'" (click)="currentFilter = 'all'">All</button>
+    <button [class.active]="currentFilter === 'completed'" (click)="currentFilter = 'completed'">Completed</button>
+    <button [class.active]="currentFilter === 'uncompleted'" (click)="currentFilter = 'uncompleted'">Uncompleted</button>
+  </div>
+  <button class="sort-btn" [class.active]="isSortedByPriority" (click)="isSortedByPriority = !isSortedByPriority">Sorted by priority</button>
+</div>
+
 <ul>
-  <!-- Go through tasks. pipe 'async' subscribe on updates -->
-  @for (task of todoService.tasks$ | async; track task.id) {
+  @for (task of displayedTasks; track task.id) {
     <li [ngClass]="{'priority-high': task.priority === 'high', 'priority-medium': task.priority === 'medium', 'priority-low': task.priority === 'low'}">
-      <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)">
-      <span [class.completed-text]="task.completed">{{ task.title }}</span>
-      <small>(Priority: {{ task.priority }})</small>
+      @if (editingTaskId === task.id) {
+        <input type="text" class="edit-input" [value]="task.title" #editInput (keyup.enter)="saveEdit(task.id, editInput.value)" (keyup.escape)="canselEdit()">
+        <button class="save-btn" (click)="saveEdit(task.id, editInput.value)">Save</button>
+        <button class="cansel-btn" (click)="canselEdit()">Cancel</button>
+      } @else {
+        <input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)">
+        <span [class.completed-text]="task.completed">{{ task.title }}</span>
+        <small>(Priority: {{ task.priority }})</small>
+
+        <div class="action">
+          <button class="edit-btn" (click)="startEdit(task.id)">Edit</button>
+          <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
+        </div>
+      }
     </li>
   } @empty {
     <p>There are no tasks, or they are still loading...</p>

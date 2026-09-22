@@ -52,5 +52,18 @@ export class TodoService {
     const currentTasks = this.tasksSubject.getValue();
     this.tasksSubject.next([newTask, ...currentTasks]);
   }
+
+  // Method for delete
+  deleteTask(id: number) {
+    const currentTasks = this.tasksSubject.getValue();
+    const updatedTasks = currentTasks.filter(task => task.id !== id);
+    this.tasksSubject.next(updatedTasks);
+  }
+
+  editTask(id: number, newTitle: string) {
+    const currentTasks = this.tasksSubject.getValue();
+    const updatedTasks = currentTasks.map(task => task.id === id ? { ...task, title: newTitle } : task);
+    this.tasksSubject.next(updatedTasks);
+  }
 }
 
